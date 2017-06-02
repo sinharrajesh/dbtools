@@ -50,4 +50,48 @@ It will also create altmetrics updated data in altmetric/data/altmetricgplus[use
 Note that you will need to add config.py file with API_KEY=BlahBlah from google+ API console to make it work
 
 
+## Twitter analysis directory
+
+This is a running directory which stores data as gathered from several scripts
+
+Usually we will need to gather incremental data for a specific date since a last tweet
+
+find the last tweet from DDMM directory which is the last by finding the file LASTTWEET in that
+
+then run the genincr.sh script as follows
+
+````
+./genincr.sh DDMM LASTTWEETID
+````
+
+It will do many things like follows
+* Create a directory DDMM 
+* create a file  altmetrictweets${dt}.csv in dbtools/altmetric/data/ directory
+* create a file  altmetrictweetuserss${dt}.csv in dbtools/altmetric/data/ directory
+* creats a file  tweets_${dt} in DDMM directory - These are incremental tweets since the last tweet
+* creates  file  usersctivity_${dt} in DDMM directory - these are incremental user stats since the last tweet
+
+Once done we need to add these incremental stuff to consolidated files kept in data/cons directory
+
+Find the last alltweetsDDMM.csv which can be used and then cat the new tweets underneath it
+
+````
+cat oalltweets{oldDDMM].csv tweets_DDMM.csv > alltweetsDDMM.csv
+````
+
+Similarly you cat the users 
+
+````
+cd cons
+cat allusers{oldDDMM}.csv useractivity_DDMM.csv > /tmp/allusersDDMM.csv
+./userincr.py /tmp/allusersDDMM.csv > allusersDDMM.csv
+````
+
+Once done we run some pivot table stats on this to get some data out. The way to do that is from twitter-analysis directory
+
+````
+./appendpanda.py allusersDDMM.csv alltweetsDDMM.csv > cons/useractivityDDMM.csv
+````
+
+If you wish you can use the script called botratings2.py to run bot or not against it - but it is slow
 

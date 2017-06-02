@@ -1,0 +1,30 @@
+#!/bin/bash
+
+for i in p1 p2 p3 p4
+do
+    ./user.py $i | sort > ${i}_user
+done
+cat p1_user p2_user p3_user p4_user  | sort -u > all_users
+
+prevuser=""
+prevsc=""
+prevfc=""
+prevdc=""
+firstTime="True"
+while IFS="," read -r user  sc  fc  dc
+do
+    if [[ ${prevuser} != ${user} ]]
+    then
+        if [[ $firstTime != "True" ]]
+        then
+            echo "${prevuser},${prevsc},${prevfc},${prevdc}"
+        fi   
+    fi
+    prevuser=$user
+    prevsc=$sc
+    prevfc=$fc
+    prevdc=$dc
+    firstTime="False"
+done < all_users >all_unique
+echo "${prevuser},${prevsc},${prevfc},${prevdc}" >> all_unique
+
