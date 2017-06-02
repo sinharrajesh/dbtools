@@ -94,3 +94,53 @@ Once done we run some pivot table stats on this to get some data out. The way to
 
 If you wish you can use the script called botratings2.py to run bot or not against it - but it is slow
 
+
+## Running BotOrNot service
+
+
+Get mashape and twitter keys/secrets as per https://github.com/IUNetSci/botometer-python
+
+Now this can run very slowly so try to run as per usage given - botratings2.py useranalys0106.csv Opfilename endingAt startingfrom keyfile
+
+        useranalysis0106.csv is the supplied file which has prelim user data
+
+        opfilename is the name the script will write to
+
+        endingAt at which row
+
+        starting from which row.
+
+        key-file has mashape and 4 twitter keys
+
+keyfile should be a python file with following entries
+
+````
+# Your mashape_key generated when you add botometer api to default app
+mashape_key = ""
+
+# Your twitter account and app keys here
+consumer_key=''
+consumer_secret=''
+access_token_key=''
+access_token_secret=''
+````
+
+
+Now we can run this in chunks of 1000 as follows
+
+````
+        botrating.py useranalysis0106.csv first1000.csv keyfile 1000   1
+        botrating.py useranalysis0106.csv second1000.csv keyfile 2000   1001
+        botrating.py useranalysis0106.csv third1000.csv keyfile 3000   2001
+        botrating.py useranalysis0106.csv fourth1000.csv keyfile 4000   3001
+        ...
+        botrating.py useranalysis0106.csv last1000.csv keyfile 10000   9001
+````
+
+Note it will be useful to redirect the stdout to a file so that in case things go wrong
+
+you still have the output for the records processed which can be manually merged
+
+````
+botrating.py useranalysis0106.csv first1000.csv 1000   1 keyfile > first1000.log
+````
