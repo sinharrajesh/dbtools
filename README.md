@@ -3,45 +3,48 @@
 ** Dayalbagh Tools and scripts **
 These are set of tools and utilities developed for social media outreach, Telegram bots etc that we need in Dayalbagh as tech infusion.
 
-__ Altmetric Readers __
+## Altmetric directory
 
-There are two scripts which read and dump data on stdout for tweeter and google plus for a given altmetric articled id
+you can run variety of scripts from here
 
-twitter.py altmetric_article_id > tweet.csv   
-
-This will put data in tweet.csv with twitter handles:Name of the tweeter
-
-gplus.py altmetric_article_id > gplus.csv   
-
-This will put data in tweet.csv with either +Gplus Id or  Name of person at the google plus home page
-
-__ About the code base __
-[SocialNW.py](https://github.com/sinharrajesh/dbtools/SocialNW.py) has AltmetricBase class which does all the grunt work. Has a template pattern based pipeline method
-
-[twitter.py](https://github.com/sinharrajesh/dbtools/twitter.py) overrides findPosters and can be run from command line for twitter analysis
-
-[gplus.py](https://github.com/sinharrajesh/dbtools/gplus.py) overrides findPosters and can be run from command line for google plus analysis
+````
+twitter.py <altmetricId> [user|tweet] 
+````
+This will dump either user handles or tweet ids on the standard output given a specific altmetric document id
 
 
-
-__ Tweet data analysis __
-Pattern-1 http://www.tandfonline.com/doi/abs/10.1080/03081079.2017.1308361        19     tweetdata/abs_data.json
-
-Pattern-2 http://www.tandfonline.com/doi/full/10.1080/03081079.2017.1308361    13493     tweetdata/full_data.json
-
-Pattern-3 10.1080/03081079.2017.1308361                                        14382     tweetdata/10_data.json
-
-Pattern-4 http://dx.doi.org/10.1080/03081079.2017.1308361                       8723     tweetdata/10_data.json
+````
+gplus.py <altmetricId> [user|post] 
+````
+This will dump either user names/g+ ids or post urls on the standard output given a specific altmetric document id
 
 
-Intersections
-p1 intersect p2 = Null
-p1 intersect p3 = Null
-p1 intersect p4 = Null
-p2 intersect p3 = 10709
-p2 intersect p4 = 26
-p3 intersect p4 = 25
-unique across all 4 = 14382
+````
+gplusextended.py <altmetricId> post 
+````
+This will dump all possible information that altmetric has about a googple+ post on standard output
 
 
-__ Tweeter's status and follower counts __
+all the above three are CSV files delimited by $
+
+
+## Altmetrc data directory
+
+This is a running directory which stores data as gathered from several scripts 
+
+usually they will be marked with altmetric[gplus][date].csv 
+
+## google-plus-analysis
+
+Best to run and read the following script as shown
+
+````
+./mainscript.sh DDMM 
+````
+
+This will search for all 4 patterns in Google Plus and dump them in DDMM/gpost${dt}.csv file 
+
+It will also create altmetrics updated data in altmetric/data/altmetricgplus[users|posts|full]$dt.csv files for that date
+
+
+
