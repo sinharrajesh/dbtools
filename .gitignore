@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Keyfiles
+*keys.py
+config.py
+mashape
+dbtools.pem

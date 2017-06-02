@@ -110,12 +110,12 @@ x=`cat $opfinfile | tail -1 | awk -F'$' '{print $1}'`
 echo $x >$ltfile
 echo "LAST-TWEET no in $ltfile
 
-echo "Generating pivot table for useranalysis"
-useranalysis="useranalysis${dt}"
-./appendpanda.py $userfile $opfinline $useranalysis
-echo "output in $output"
+#echo "Generating pivot table for useranalysis"
+#useranalysis="useranalysis${dt}"
+#./appendpanda.py $userfile $opfinline $useranalysis
+#echo "output in $output"
 
-echo "Botometer readings not yet done but can be run later"
+#echo "Botometer readings not yet done but can be run later"
 
 ecgo "Updated Altmetric tweets ids in $altfile"
 echo "All Tweets in $opfinfile"
