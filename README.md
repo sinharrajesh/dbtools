@@ -22,13 +22,13 @@ This will dump either user names/g+ ids or post urls on the standard output give
 ````
 gplusextended.py <altmetricId> post 
 ````
-This will dump all possible information that altmetric has about a googple+ post on standard output
+This will dump all possible information that altmetric has about a google+ post on standard output
 
 
 all the above three are CSV files delimited by $
 
 
-## Altmetrc data directory
+## Altmetric data directory
 
 This is a running directory which stores data as gathered from several scripts 
 
@@ -45,6 +45,9 @@ Best to run and read the following script as shown
 This will search for all 4 patterns in Google Plus and dump them in DDMM/gpost${dt}.csv file 
 
 It will also create altmetrics updated data in altmetric/data/altmetricgplus[users|posts|full]$dt.csv files for that date
+
+
+Note that you will need to add config.py file with API_KEY=BlahBlah from google+ API console to make it work
 
 
 
